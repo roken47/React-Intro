@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Potato</title>
+  </head>
+  <body>
+    <!-- element where application will be rendered -->
+    <div id="root"></div>
+    <!--React-->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <!--React Dom-->
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <!--Babel-->
+    <script
+      crossorigin
+      src="https://unpkg.com/babel-standalone@6/babel.min.js"
+    ></script>
+    <!--Example with Function Potato-->
+    <script type="text/babel">
+      function Potato(props) {
+        return (
+          <div>
+            <h1>{props.potatoName}</h1>
+            <img src={props.imageSource} />
+            <br />
+            <a href={props.wiki}>{props.potatoName}</a>
+          </div>
+        );
+      }
+      function Welcome(props) {
+        return (
+          <div>
+            <span>
+              <h4>Welcome {props.userName}</h4>
+              <br /> {props.rating}{" "}
+            </span>
+            <p>{props.review}</p>
+          </div>
+        );
+      }
+      const element = (
+        <div>
+          <Welcome
+            userName="Zaddy"
+            rating="3.5"
+            review="Schweet tators! Not the best but still enough to make my mouth drool."
+          />
+          <Potato
+            potatoName="Russet"
+            imageSource="https://images.unsplash.com/photo-1591600916903-2b8cbc102e23?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTR8fHJ1c3NldCUyMHBvdGF0b3xlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
+            wiki="https://en.wikipedia.org/wiki/Russet_potato"
+          />
+          <Potato
+            potatoName="Yukon"
+            imageSource="https://images.unsplash.com/photo-1579702494601-52112aa9dc5f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+            wiki="https://en.wikipedia.org/wiki/Yukon_Gold_potato"
+          />
+        </div>
+      );
+
+      ReactDOM.render(element, document.getElementById("root"));
+    </script>
+  </body>
+</html>

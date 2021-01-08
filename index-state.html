@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React State</title>
+  </head>
+  <body>
+    <!-- element where application will be rendered -->
+    <div id="root"></div>
+    <!--React-->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <!--React Dom-->
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <!--Babel-->
+    <script
+      crossorigin
+      src="https://unpkg.com/babel-standalone@6/babel.min.js"
+    ></script>
+    <!--Example with State-->
+    <script type="text/babel">
+      //   function Counter(props) {
+      //     return <div>Counter</div>;
+      //   }
+      class Counter extends React.Component {
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            count: 0,
+          };
+        }
+
+        render() {
+          setTimeout(() => {
+            console.log("hi");
+
+            this.setState({ count: 22 });
+          }, 1500);
+          return <div>{this.state.count}</div>;
+        }
+      }
+      const element = <Counter />;
+
+      ReactDOM.render(element, document.getElementById("root"));
+    </script>
+  </body>
+</html>
