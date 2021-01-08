@@ -4,6 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>React Event Handler</title>
+    <style>
+      body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      button {
+        margin: 0.5rem;
+      }
+    </style>
   </head>
   <body>
     <!-- element where application will be rendered -->
@@ -23,34 +34,77 @@
       crossorigin
       src="https://unpkg.com/babel-standalone@6/babel.min.js"
     ></script>
-    <!--Example with Event Handler-->
+    <!--Example with Event Handler and Simple Counter Exercises-->
+    <!-- 
+    1. Increment only to 20
+    2. Decrement only to 0
+    3. Change # to Red if >= 10
+    4. Change # to Original Color < 10
+    5. Give an initial value via props and if no props make it 0
+    6. Add a reset button
+    7. reset button only visible on condition 
+        it doesn't equal intial count value with or without props -->
     <script type="text/babel">
       class Counter extends React.Component {
         constructor(props) {
           super(props);
 
           this.state = {
-            count: 0,
+            count: props.initialCount || 0,
           };
           this.handleIncrement = this.handleIncrement.bind(this);
+          this.handleDecrement = this.handleDecrement.bind(this);
         }
 
         handleIncrement = (event) => {
-          this.setState((state, props) => ({
-            count: state.count + 1,
-          }));
+          this.setState((state, props) => {
+            if (state.count < 20) {
+              return state.count++;
+            }
+          });
         };
 
+        handleDecrement = (event) => {
+          this.setState((state, props) => {
+            if (state.count < 21 && state.count > 0) {
+              return state.count--;
+            }
+          });
+        };
+
+        handleReset = (event) => {
+          this.setState((state, props) => ({
+            count: this.props.initialCount || 0,
+          }));
+        };
         render() {
           return (
             <div>
-              {this.state.count}
+              <button onClick={this.handleDecrement}>decrement (-)</button>
+              <span
+                style={
+                  this.state.count >= 10 ? { color: "red" } : { color: "black" }
+                }
+              >
+                {this.state.count}
+              </span>
               <button onClick={this.handleIncrement}>increment (+)</button>
+              <br />
+              <button
+                style={
+                  this.state.count !== this.props.initialCount
+                    ? { visibility: "visible" }
+                    : { visibility: "hidden" }
+                }
+                onClick={this.handleReset}
+              >
+                Reset (#)
+              </button>
             </div>
           );
         }
       }
-      const element = <Counter />;
+      const element = <Counter initialCount={14} />;
 
       ReactDOM.render(element, document.getElementById("root"));
     </script>
